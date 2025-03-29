@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/Siuumanth/jenkins-test.git'  // Change this to your repo
+                git 'https://github.com/Siuumanth/jenkins-test.git'
             }
         }
         stage('Install Dependencies') {
@@ -12,12 +12,12 @@ pipeline {
                 bat 'npm install'
             }
         }
-        stage('Run Tests') {
+        stage('Running Tests') {
             steps {
                 bat 'npm test'
             }
         }
-        stage('Start App') {
+        stage('Starting App') {
             steps {
                 bat 'node server.js'
             }
