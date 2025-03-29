@@ -4,12 +4,14 @@ const path = require("path");
 const app = express();
 const port = 3000;
 
-// Serve static files from the current directory
 app.use(express.static(__dirname));
 
-// Handle all requests
 app.get("*", (req, res) => {
-    const filePath = path.join(__dirname, req.path === "/" ? "index.html" : req.path + ".html");
+    let filePath = path.join(__dirname, req.path);
+
+    if (!path.extname(filePath)) {
+        filePath += ".html";
+    }
 
     if (path.extname(filePath) === ".html") {
         res.sendFile(filePath, (err) => {
@@ -22,7 +24,6 @@ app.get("*", (req, res) => {
     }
 });
 
-// Start the server
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
 });
